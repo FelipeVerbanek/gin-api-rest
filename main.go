@@ -1,9 +1,10 @@
 package main
 
 import (
-	"gin-api-rest/db"
+	database "gin-api-rest/db"
 	"gin-api-rest/routes"
 
+	"github.com/joho/godotenv"
 	"gorm.io/gorm"
 )
 
@@ -13,7 +14,8 @@ var (
 )
 
 func main() {
-	db.Connection()
+	godotenv.Load()
+	database.Connection()
 
 	routes.HandleRequest()
 }

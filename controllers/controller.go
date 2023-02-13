@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"gin-api-rest/db"
+	database "gin-api-rest/db"
 	"gin-api-rest/models"
 	"net/http"
 
@@ -15,7 +15,8 @@ func CriaAluno(c *gin.Context) {
 			"error": err.Error()})
 		return
 	}
-	db.DB.Create(&aluno)
+
+	database.DB.Create(&aluno)
 	c.JSON(http.StatusOK, aluno)
 }
 
