@@ -2,19 +2,23 @@ package db
 
 import (
 	"gin-api-rest/models"
+	"log"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
-func Connection() *gorm.DB {
+var (
+	DB  *gorm.DB
+	err error
+)
+
+func Connection() {
 	dsn := "host=localhost user=postgres password=postgres dbname=api_gin port=5432 sslmode=disable"
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	DB, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
-		panic(err)
+		log.Panic("Erro ao conectar com banco de dados")
 	}
 
-	db.AutoMigrate(&models.Aluno{})
-
-	return db
+	DB.AutoMigrate(&models.Aluno{})
 }
