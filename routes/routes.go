@@ -11,6 +11,8 @@ import (
 
 func HandleRequest() {
 	r := gin.Default()
+	r.LoadHTMLGlob("templates/*")
+	r.Static("/assets", "./assets")
 
 	r.POST("/alunos", controllers.CriaAluno)
 	r.GET("/alunos", controllers.ListarAlunos)
@@ -20,6 +22,7 @@ func HandleRequest() {
 	r.PATCH("/alunos/:id", controllers.EditarAluno)
 
 	r.GET("/:nome", controllers.NotFound)
+	r.GET("/index", controllers.ExibePaginaIndex)
 
 	port := os.Getenv("POST")
 
