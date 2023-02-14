@@ -49,9 +49,9 @@ func TestListAlunosHandler(t *testing.T) {
 	defer DeleteAlunoMock()
 
 	r := SetupRoutesTest()
-	r.GET("/alunos", controllers.ListarAlunos)
+	r.GET("/api/alunos", controllers.ListarAlunos)
 
-	req, _ := http.NewRequest("GET", "/alunos", nil)
+	req, _ := http.NewRequest("GET", "/api/alunos", nil)
 	resp := httptest.NewRecorder()
 	r.ServeHTTP(resp, req)
 
@@ -64,8 +64,8 @@ func TestBuscaAlunoCPFHandler(t *testing.T) {
 	defer DeleteAlunoMock()
 	r := SetupRoutesTest()
 
-	r.GET("/alunos/cpf/:cpf", controllers.BuscaALunoCPF)
-	req, _ := http.NewRequest("GET", "/alunos/cpf/99999999999", nil)
+	r.GET("/api/alunos/cpf/:cpf", controllers.BuscaALunoCPF)
+	req, _ := http.NewRequest("GET", "/api/alunos/cpf/99999999999", nil)
 	resp := httptest.NewRecorder()
 	r.ServeHTTP(resp, req)
 
@@ -77,9 +77,9 @@ func TestBuscaAlunoPorIDHandler(t *testing.T) {
 	CriaAlunoMock()
 	defer DeleteAlunoMock()
 	r := SetupRoutesTest()
-	r.GET("/alunos/:id", controllers.BuscaAlunoID)
+	r.GET("/api/alunos/:id", controllers.BuscaAlunoID)
 
-	path := "/alunos/" + strconv.Itoa(ID)
+	path := "/api/alunos/" + strconv.Itoa(ID)
 	req, _ := http.NewRequest("GET", path, nil)
 	resp := httptest.NewRecorder()
 	r.ServeHTTP(resp, req)
@@ -98,9 +98,9 @@ func TestDeletaAlunoHandler(t *testing.T) {
 	defer DeleteAlunoMock()
 
 	r := SetupRoutesTest()
-	r.DELETE("/alunos/:id", controllers.DeleteAluno)
+	r.DELETE("/api/alunos/:id", controllers.DeleteAluno)
 
-	path := "/alunos/" + strconv.Itoa(ID)
+	path := "/api/alunos/" + strconv.Itoa(ID)
 	req, _ := http.NewRequest("DELETE", path, nil)
 	resp := httptest.NewRecorder()
 	r.ServeHTTP(resp, req)
@@ -117,10 +117,10 @@ func TestEditaAlunoHandler(t *testing.T) {
 	CriaAlunoMock()
 
 	r := SetupRoutesTest()
-	r.PATCH("/alunos/:id", controllers.EditarAluno)
+	r.PATCH("/api/alunos/:id", controllers.EditarAluno)
 
 	aluno := models.Aluno{Nome: "Testando Editar", CPF: "12345678912", RG: "123123945"}
-	path := "/alunos/" + strconv.Itoa(ID)
+	path := "/api/alunos/" + strconv.Itoa(ID)
 	resultJson, _ := json.Marshal(aluno)
 
 	req, _ := http.NewRequest("PATCH", path, bytes.NewBuffer(resultJson))

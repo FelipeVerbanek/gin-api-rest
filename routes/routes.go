@@ -14,14 +14,14 @@ func HandleRequest() {
 	r.LoadHTMLGlob("templates/*")
 	r.Static("/assets", "./assets")
 
-	r.POST("/alunos", controllers.CriaAluno)
-	r.GET("/alunos", controllers.ListarAlunos)
-	r.GET("/alunos/:id", controllers.BuscaAlunoID)
-	r.GET("/alunos/cpf/:cpf", controllers.BuscaALunoCPF)
-	r.DELETE("/alunos/:id", controllers.DeleteAluno)
-	r.PATCH("/alunos/:id", controllers.EditarAluno)
+	r.POST("/api/alunos", controllers.CriaAluno)
+	r.GET("/api/alunos", controllers.ListarAlunos)
+	r.GET("/api/alunos/:id", controllers.BuscaAlunoID)
+	r.GET("/api/alunos/cpf/:cpf", controllers.BuscaALunoCPF)
+	r.DELETE("/api/alunos/:id", controllers.DeleteAluno)
+	r.PATCH("/api/alunos/:id", controllers.EditarAluno)
 
-	r.GET("/index", controllers.ExibePaginaIndex)
+	r.GET("/", controllers.ExibePaginaIndex)
 
 	r.NoRoute(controllers.RouteNotFound)
 
