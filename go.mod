@@ -2,6 +2,8 @@ module gin-api-rest
 
 go 1.20
 
+require github.com/swaggo/swag/example/celler v0.0.0-20230125210707-aa3e8d5fa2f6
+
 require (
 	github.com/KyleBanks/depth v1.2.1 // indirect
 	github.com/PuerkitoBio/purell v1.2.0 // indirect
@@ -38,6 +40,8 @@ require (
 	github.com/shurcooL/sanitized_anchor_name v1.0.0 // indirect
 	github.com/stretchr/objx v0.5.0 // indirect
 	github.com/stretchr/testify v1.8.1 // indirect
+	github.com/swaggo/files v1.0.0 // indirect
+	github.com/swaggo/gin-swagger v1.5.3 // indirect
 	github.com/swaggo/swag v1.8.10 // indirect
 	github.com/ugorji/go/codec v1.2.9 // indirect
 	github.com/urfave/cli/v2 v2.24.3 // indirect

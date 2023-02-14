@@ -6,21 +6,9 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	_ "github.com/swaggo/swag/example/celler/httputil"
 )
 
-// CriaAluno godoc
-//
-//	@Summary		Cria um aluno
-//	@Description	Routa responsavel por criar alunos
-//	@Tags			alunos
-//	@Accept			json
-//	@Produce		json
-//	@Param			aluno	body		model.Alunos	true	"Add aluno"
-//	@Success		200	{object}	model.Aluno
-//	@Failure		400	{object}	httputil.HTTPError
-//	@Failure		404	{object}	httputil.HTTPError
-//	@Failure		500	{object}	httputil.HTTPError
-//	@Router			/alunos/ [post]
 func CriaAluno(c *gin.Context) {
 	var aluno models.Aluno
 	if err := c.ShouldBindJSON(&aluno); err != nil {
@@ -39,6 +27,16 @@ func CriaAluno(c *gin.Context) {
 	c.JSON(http.StatusOK, aluno)
 }
 
+// ListarAlunos godoc
+//
+//	@Summary		Cria um aluno
+//	@Description	Routa responsavel por criar alunos
+//	@Tags			alunos
+//	@Accept			json
+//	@Produce		json
+//	@Success		200	{object}	models.Aluno
+//	@Failure		400	{object}	httputil.HTTPError
+//	@Router			/alunos/ [get]
 func ListarAlunos(c *gin.Context) {
 	var alunos []models.Aluno
 	database.DB.Find(&alunos)
