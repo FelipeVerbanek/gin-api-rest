@@ -8,6 +8,19 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// CriaAluno godoc
+//
+//	@Summary		Cria um aluno
+//	@Description	Routa responsavel por criar alunos
+//	@Tags			alunos
+//	@Accept			json
+//	@Produce		json
+//	@Param			aluno	body		model.Alunos	true	"Add aluno"
+//	@Success		200	{object}	model.Aluno
+//	@Failure		400	{object}	httputil.HTTPError
+//	@Failure		404	{object}	httputil.HTTPError
+//	@Failure		500	{object}	httputil.HTTPError
+//	@Router			/alunos/ [post]
 func CriaAluno(c *gin.Context) {
 	var aluno models.Aluno
 	if err := c.ShouldBindJSON(&aluno); err != nil {
