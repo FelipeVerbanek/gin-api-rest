@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"gin-api-rest/models"
 	"log"
-	"os"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -15,14 +14,16 @@ var (
 	err error
 )
 
-func Connection() {
-	host := os.Getenv("HOST_DB")
-	user := os.Getenv("USER_DB")
-	password := os.Getenv("PASSWORD_DB")
-	dbname := os.Getenv("NAME_DB")
-	port := os.Getenv("PORT_DB")
+type InputConnectDB struct {
+	Host     string
+	User     string
+	Password string
+	Dbname   string
+	Port     string
+}
 
-	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable", host, user, password, dbname, port)
+func Connection(inputDB InputConnectDB) {
+	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable", inputDB.Host, inputDB.User, inputDB.Password, inputDB.Dbname, inputDB.Port)
 	fmt.Println(dsn)
 	DB, err = gorm.Open(postgres.Open(dsn))
 	if err != nil {
