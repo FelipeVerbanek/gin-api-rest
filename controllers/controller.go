@@ -20,6 +20,12 @@ func CriaAluno(c *gin.Context) {
 	c.JSON(http.StatusOK, aluno)
 }
 
+func ListarAlunos(c *gin.Context) {
+	var alunos []models.Aluno
+	database.DB.Find(&alunos)
+	c.JSON(200, alunos)
+}
+
 func NotFound(c *gin.Context) {
 	nome := c.Params.ByName("nome")
 	c.JSON(404, gin.H{

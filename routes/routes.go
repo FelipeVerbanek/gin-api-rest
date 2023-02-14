@@ -13,6 +13,7 @@ func HandleRequest() {
 	r := gin.Default()
 
 	r.POST("/alunos", controllers.CriaAluno)
+	r.GET("/alunos", controllers.ListarAlunos)
 
 	r.GET("/:nome", controllers.NotFound)
 
