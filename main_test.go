@@ -6,7 +6,6 @@ import (
 	"gin-api-rest/controllers"
 	database "gin-api-rest/db"
 	"gin-api-rest/models"
-	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"strconv"
@@ -42,20 +41,6 @@ func CriaAlunoMock() {
 func DeleteAlunoMock() {
 	var aluno models.Aluno
 	database.DB.Delete(&aluno, ID)
-}
-
-func TestCheckRouteNotFound(t *testing.T) {
-	r := SetupRoutesTest()
-	r.GET("/:nome", controllers.NotFound)
-
-	req, _ := http.NewRequest("GET", "/gui", nil)
-	resp := httptest.NewRecorder()
-	r.ServeHTTP(resp, req)
-	assert.Equal(t, http.StatusNotFound, resp.Code, "Deveriam ser iguais")
-	mockResp := `{"message":"Pagina gui não encontrada!"}`
-	respBody, _ := ioutil.ReadAll(resp.Body)
-
-	assert.Equal(t, mockResp, string(respBody))
 }
 
 func TestListAlunosHandler(t *testing.T) {

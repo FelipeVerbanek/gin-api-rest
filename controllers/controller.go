@@ -95,13 +95,6 @@ func BuscaALunoCPF(c *gin.Context) {
 	c.JSON(http.StatusOK, aluno)
 }
 
-func NotFound(c *gin.Context) {
-	nome := c.Params.ByName("nome")
-	c.JSON(404, gin.H{
-		"message": "Pagina " + nome + " não encontrada!",
-	})
-}
-
 func ExibePaginaIndex(c *gin.Context) {
 	var alunos []models.Aluno
 	database.DB.Find(&alunos)
@@ -109,4 +102,8 @@ func ExibePaginaIndex(c *gin.Context) {
 	c.HTML(http.StatusOK, "index.html", gin.H{
 		"alunos": alunos,
 	})
+}
+
+func RouteNotFound(c *gin.Context) {
+	c.HTML(http.StatusNotFound, "404.html", nil)
 }

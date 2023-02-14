@@ -21,8 +21,9 @@ func HandleRequest() {
 	r.DELETE("/alunos/:id", controllers.DeleteAluno)
 	r.PATCH("/alunos/:id", controllers.EditarAluno)
 
-	r.GET("/:nome", controllers.NotFound)
 	r.GET("/index", controllers.ExibePaginaIndex)
+
+	r.NoRoute(controllers.RouteNotFound)
 
 	port := os.Getenv("POST")
 
