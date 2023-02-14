@@ -26,6 +26,21 @@ func ListarAlunos(c *gin.Context) {
 	c.JSON(200, alunos)
 }
 
+func BuscaAlunoID(c *gin.Context) {
+	var aluno models.Aluno
+	id := c.Params.ByName("id")
+
+	database.DB.First(&aluno, id)
+
+	if aluno.ID == 0 {
+		c.JSON(http.StatusNotFound, gin.H{
+			"Not found": "Aluno não encontrado",
+		})
+		return
+	}
+	c.JSON(http.StatusOK, aluno)
+}
+
 func NotFound(c *gin.Context) {
 	nome := c.Params.ByName("nome")
 	c.JSON(404, gin.H{
