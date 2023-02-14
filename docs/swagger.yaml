@@ -48,8 +48,33 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Aluno'
-        "400":
-          description: Bad Request
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: Cria um aluno
+      tags:
+      - alunos
+    post:
+      consumes:
+      - application/json
+      description: Routa responsavel por criar alunos
+      parameters:
+      - description: Add aluno
+        in: body
+        name: aluno
+        required: true
+        schema:
+          $ref: '#/definitions/models.Aluno'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Aluno'
+        "500":
+          description: Internal Server Error
           schema:
             $ref: '#/definitions/httputil.HTTPError'
       summary: Cria um aluno
