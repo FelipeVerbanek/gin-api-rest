@@ -51,6 +51,38 @@ func DeleteAluno(c *gin.Context) {
 	})
 }
 
+func EditarAluno(c *gin.Context) {
+	var aluno models.Aluno
+	id := c.Params.ByName("id")
+	database.DB.First(&aluno, id)
+
+	if err := c.ShouldBindJSON(&aluno); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	database.DB.Model(&aluno).UpdateColumns(aluno)
+	c.JSON(http.StatusOK, aluno)
+
+}
+
+func BuscaALunoCPF(c *gin.Context) {
+	var aluno models.Aluno
+	cpf := c.Param("cpf")
+
+	database.DB.Where(&models.Aluno{CPF: cpf}).First(&aluno)
+	if aluno.ID == 0 {
+		c.JSON(http.StatusNotFound, gin.H{
+			"Not found": "Aluno não encontrado",
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, aluno)
+}
+
 func NotFound(c *gin.Context) {
 	nome := c.Params.ByName("nome")
 	c.JSON(404, gin.H{
